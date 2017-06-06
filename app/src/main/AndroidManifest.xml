@@ -25,7 +25,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
@@ -67,11 +67,19 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TripDetailActivity"></activity>
+        <activity android:name=".TripDetailActivity" />
+        <activity
+            android:name=".JoinedTripActivity"
+            android:label="@string/title_activity_joined_trip"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".BaseNaviActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.yunan.tripscanner.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

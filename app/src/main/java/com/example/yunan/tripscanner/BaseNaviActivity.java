@@ -100,26 +100,28 @@ public class BaseNaviActivity extends AppCompatActivity implements NavigationVie
         mCurrentId = id;
 
 
-
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_search) {
+            Intent intent = new Intent(this, ScrollingSearchActivity.class) ;
+            startActivity(intent) ;
+        } else if (id == R.id.nav_joined_trip) {
+            Intent intent = new Intent(this, JoinedTripActivity.class) ;
+            startActivity(intent) ;
+        } else if (id == R.id.nav_hosted_trip) {
 
         } else if (id == R.id.nav_newsfeed) {
             selectNewsFeed();
-
-        } else if (id == R.id.nav_search) {
-            Intent intent = new Intent(this, ScrollingSearchActivity.class) ;
-            startActivity(intent) ;
         } else if (id == R.id.nav_register) {
             Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_test2) {
-            Intent intent = new Intent(this, ProfileActivity.class);
+        } else if (id == R.id.nav_sign_out) {
+            ProfileManager.getInstance().saveUserEmail("");
+            ProfileManager.getInstance().saveUserToken("");
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_send) {
-
+            finish();
         }
 
 

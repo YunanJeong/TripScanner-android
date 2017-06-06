@@ -64,6 +64,7 @@
     <string name="save">저장</string>
     <string name="pick_profile_picture">Pick Profile Picture</string>
     <string name="profile_photo_file_name">profile_photo.png</string>
+    <string name="title_activity_joined_trip">JoinedTripActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

@@ -75,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
             CommunicationManager communication = new CommunicationManager();
-            response = communication.GET("http://huy.dlinkddns.com/api/v1/users/me");
+            response = communication.GET("/api/v1/users/me");
 
             if(response.contains("error")){
                 return null;

@@ -30,6 +30,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -205,7 +207,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserRegisterTask(email, password);
+            mAuthTask = new UserRegisterTask(email, password, passwordConfirm);
             mAuthTask.execute((Void) null);
         }
     }
@@ -320,10 +322,15 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
         private final String mEmail;
         private final String mPassword;
-        private final String mURL = "http://192.168.0.21:3000/api/v1/users/";
-        UserRegisterTask(String email, String password) {
+        private final String mPasswordConfirm;
+        private final String mGender;
+
+        private final String mURL = "/api/v1/users/";
+        UserRegisterTask(String email, String password, String passwordConfirm) {
             mEmail = email;
             mPassword = password;
+            mPasswordConfirm = passwordConfirm;
+            mGender = "male";
         }
 
         /*@Override
@@ -333,11 +340,29 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 */
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            // attempt authentication against a network service.
+            String response = "";
+            User user = new User();
+            user.getUser().put("email",mEmail);
+            user.getUser().put("password", mPassword);
+            user.getUser().put("password_confirmation",mPasswordConfirm);
+            user.getUser().put("gender", mGender);
 
-            // TODO: register the new account here.
-            POST(mURL);
 
+            CommunicationManager communication = new CommunicationManager();
+            response = communication.POST(mURL, user);
+
+
+            if(response.contains("error")){
+                return false;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                user = mapper.readValue(response, User.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return true;
         }
 
@@ -345,8 +370,6 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
-
 
             if (success) {
                 finish();
@@ -362,103 +385,6 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             showProgress(false);
         }
 
-        protected String POST(String url){
-
-            String result = "";
-            try {
-                URL urlCon = new URL(url);
-                HttpURLConnection httpCon = (HttpURLConnection)urlCon.openConnection();
-
-                String json = "{\n" +
-                                "  \"user\": {\n" +
-                                "    \"email\": \""+mEmail+"\",\n" +
-                                "    \"password\": \""+mPassword+"\",\n" +
-                                "    \"password_confirmation\": \""+mPassword+"\"\n" +
-                                "  }\n" +
-                              "}";
-
-
-                /*
-                // build jsonObject
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.accumulate("email", mEmail);
-                jsonObject.accumulate("password", mPassword);
-                jsonObject.accumulate("password_confirmation", mPassword);
-
-                json = jsonObject.toString();*/
-
-                // ** Alternative way to convert Person object to JSON string usin Jackson Lib
-                // ObjectMapper mapper = new ObjectMapper();
-                // json = mapper.writeValueAsString(person);
-
-                // 요청 방식 선택 (GET, POST)
-                httpCon.setRequestMethod("POST");
-
-                // OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
-                httpCon.setDoOutput(true);
-                // InputStream으로 서버로 부터 응답을 받겠다는 옵션.
-                httpCon.setDoInput(true);
-
-                // Set some headers to inform server about the type of the content
-                // 서버 Response 데이터를 json 타입으로 요청
-                httpCon.setRequestProperty("Accept", "application/json");
-                // 타입설정(application/json) 형식으로 전송 (Request Body 전달시 application/json로 서버에 전달.
-                httpCon.setRequestProperty("Content-type", "application/json");
-
-                //send http message
-                OutputStream os = httpCon.getOutputStream();
-                os.write(json.getBytes("euc-kr"));
-                os.flush();
-                os.close();
-
-                // receive response as inputStream
-                InputStream is = null;
-                try {
-                    is = httpCon.getInputStream();
-                    // convert inputstream to string
-                    if(is != null)
-                        result = convertInputStreamToString(is);
-                    else
-                        result = "Did not work!";
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
-                finally {
-                    httpCon.disconnect();
-                }
-
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-            catch (Exception e) {
-                Log.d("InputStream", e.getLocalizedMessage());
-            }
-
-            return result;
-
-        }
-        private String convertInputStreamToString(InputStream is) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb = new StringBuilder();
-
-            String line = null;
-            try {
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line).append('\n');
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return sb.toString();
-        }
     }
 }
 

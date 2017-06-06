@@ -17,28 +17,26 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class CommunicationManager {
 
-    public String testPOST(String url){
+    private final String mSocketAddr = "http://52.79.118.255:3000";
+    //AWS server url : http://52.79.118.255:3000
+    //Raspberry server url : http://huy.dlinkddns.com
+    public String PUT(String url, Object obj){
         String json = "";
         String result = "";
         try {
-            URL urlCon = new URL(url);
+            URL urlCon = new URL(mSocketAddr+url);
             HttpURLConnection httpCon = (HttpURLConnection)urlCon.openConnection();
 
-
             // ** The Way to convert Object to JSON string using Jackson Lib
-            //ObjectMapper mapper = new ObjectMapper();
-            //json = mapper.writeValueAsString(obj);
-            json = "{\n" +
-                    "\t\"trip\": {\n" +
-                    "\t\t\"check_in\": \"2017-05-01\",\n" +
-                    "\t\t\"check_out\": \"2017-05-05\",\n" +
-                    "\t\t\"address\": \"강남구 역삼동\"\n" +
-                    "\t}\n" +
-                    "}";
-            // 요청 방식 선택 (GET, POST)
-            httpCon.setRequestMethod("POST");
+            if(obj != null){
+                ObjectMapper mapper = new ObjectMapper();
+                json = mapper.writeValueAsString(obj);
+            }
 
-            // OutputStream으로 POST 데이터를 넘겨주겠다는 옵션.
+            // 요청 방식 선택 (GET, POST)
+            httpCon.setRequestMethod("PUT");
+
+            // OutputStream으로 데이터를 넘겨주겠다는 옵션.
             httpCon.setDoOutput(true);
             // InputStream으로 서버로 부터 응답을 받겠다는 옵션.
             httpCon.setDoInput(true);
@@ -47,15 +45,13 @@ public class CommunicationManager {
             // 서버 Response 데이터를 json 타입으로 요청
             httpCon.setRequestProperty("Accept", "application/json");
             // 타입설정(application/json) 형식으로 전송 (Request Body 전달시 application/json로 서버에 전달.
-            httpCon.setRequestProperty("Content-type", "application/json");
+            httpCon.setRequestProperty("Content-Type", "application/json");
 
-            //if(!(obj instanceof User)){
-                //Login Session
-                String email = ProfileManager.getInstance().getUserEmail();
-                String token = ProfileManager.getInstance().getUserToken();
-                httpCon.setRequestProperty("X-User-Email",email);
-                httpCon.setRequestProperty("X-User-Token",token);
-            //}
+            //Login Session
+            String email = ProfileManager.getInstance().getUserEmail();
+            String token = ProfileManager.getInstance().getUserToken();
+            httpCon.setRequestProperty("X-User-Email",email);
+            httpCon.setRequestProperty("X-User-Token",token);
 
             //send http message
             OutputStream os = httpCon.getOutputStream();
@@ -67,16 +63,18 @@ public class CommunicationManager {
             InputStream is = null;
             try {
                 is = httpCon.getInputStream();
+            }
+            catch (IOException e) {
+                is = httpCon.getErrorStream();
+                e.printStackTrace();
+            }
+            finally {
                 // convert inputstream to string
                 if(is != null)
                     result = convertInputStreamToString(is);
                 else
-                    result = "Did not work!";
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-            finally {
+                    result = "error: Did not work!";
+
                 httpCon.disconnect();
             }
         }
@@ -91,20 +89,13 @@ public class CommunicationManager {
     }
 
 
-    public String PUT(String url, Object obj){
-        //TODO: coding PUT
-        String result = "";
-        return result;
-    }
-
-
     public String DELETE(String url, Object obj){
         //TODO: check delete error
         String json = "";
         String result = "";
 
         try {
-            URL urlCon = new URL(url);
+            URL urlCon = new URL(mSocketAddr+url);
             HttpURLConnection httpCon = (HttpURLConnection)urlCon.openConnection();
 
             // 요청 방식 선택
@@ -178,7 +169,7 @@ public class CommunicationManager {
         String json = "";
         String result = "";
         try {
-            URL urlCon = new URL(url);
+            URL urlCon = new URL(mSocketAddr+url);
             HttpURLConnection httpCon = (HttpURLConnection)urlCon.openConnection();
 
 
@@ -234,7 +225,7 @@ public class CommunicationManager {
         String json = "";
         String result = "";
         try {
-            URL urlCon = new URL(url);
+            URL urlCon = new URL(mSocketAddr+url);
             HttpURLConnection httpCon = (HttpURLConnection)urlCon.openConnection();
 
 

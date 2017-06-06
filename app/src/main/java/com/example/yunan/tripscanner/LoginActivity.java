@@ -337,7 +337,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             //user.getUser().put("gender", "male");
 
             CommunicationManager communication = new CommunicationManager();
-            response = communication.POST("http://huy.dlinkddns.com/api/v1/users/sign_in", user);
+            response = communication.POST("/api/v1/users/sign_in", user);
 
             if(response.contains("error")){
                 return false;

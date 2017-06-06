@@ -213,7 +213,7 @@ public class ScrollingSearchActivity extends AppCompatActivity {
             //attempt authentication against a network service.
 
             CommunicationManager communication = new CommunicationManager();
-            String searchResult = communication.QUERY("http://huy.dlinkddns.com/api/v1/trips", mAddress, mCheckIn, mCheckOut);
+            String searchResult = communication.QUERY("/api/v1/trips", mAddress, mCheckIn, mCheckOut);
 
             Trip trip = new Trip();
             ObjectMapper mapper = new ObjectMapper();
