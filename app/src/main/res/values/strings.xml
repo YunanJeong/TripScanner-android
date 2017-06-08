@@ -65,6 +65,9 @@
     <string name="pick_profile_picture">Pick Profile Picture</string>
     <string name="profile_photo_file_name">profile_photo.png</string>
     <string name="title_activity_joined_trip">JoinedTripActivity</string>
+    <string name="title_activity_hosted_trip">HostedTripActivity</string>
+    <string name="title_activity_owned_review">OwnedReviewActivity</string>
+    <string name="title_activity_written_review">WrittenReviewActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

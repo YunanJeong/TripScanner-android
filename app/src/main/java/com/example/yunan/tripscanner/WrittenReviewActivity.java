@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
-public class JoinedTripActivity extends AppCompatActivity {
+public class WrittenReviewActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
@@ -24,7 +24,7 @@ public class JoinedTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_joined_hosted_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("참여한 동행 목록");
+        getSupportActionBar().setTitle("내가 쓴 리뷰 목록");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Joined Result View

@@ -9,24 +9,24 @@
             android:title="Search Trips" />
         <item
             android:id="@+id/nav_joined_trip"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_send"
             android:title="Joined Trips" />
         <item
             android:id="@+id/nav_hosted_trip"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_menu_send"
             android:title="Hosted Trips" />
         <item
-            android:id="@+id/nav_newsfeed"
-            android:icon="@drawable/ic_menu_newsfeed"
-            android:title="News Feed" />
+            android:id="@+id/nav_owned_review"
+            android:icon="@drawable/ic_user_introduction"
+            android:title="Owned Review" />
         <item
-            android:id="@+id/nav_register"
+            android:id="@+id/nav_written_review"
             android:icon="@drawable/ic_menu_manage"
-            android:title="RegisterTestItem" />
+            android:title="Written Review" />
         <item
-            android:id="@+id/nav_test3"
+            android:id="@+id/nav_pending_review"
             android:icon="@drawable/ic_menu_manage"
-            android:title="TestMenuItem2" />
+            android:title="Pending Review" />
     </group>
 
     <item android:title="Private">

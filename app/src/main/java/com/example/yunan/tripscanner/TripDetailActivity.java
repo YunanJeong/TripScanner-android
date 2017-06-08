@@ -1,6 +1,7 @@
 package com.example.yunan.tripscanner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -30,7 +31,7 @@ public class TripDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trip_detail);
 
         final HashMap<String,Object> tripTemp = (HashMap<String,Object>)  getIntent().getSerializableExtra("Trip");
-        HashMap<String,Object> ownerTemp = (HashMap<String,Object>) tripTemp.get("owner");
+        final HashMap<String,Object> ownerTemp = (HashMap<String,Object>) tripTemp.get("owner");
         ArrayList<HashMap<String,Object>> membersTemp = (ArrayList<HashMap<String,Object>>) tripTemp.get("members");
 
         setTitle(tripTemp.get("address").toString());
@@ -66,12 +67,26 @@ public class TripDetailActivity extends AppCompatActivity {
         TextView jobChip = (TextView) findViewById(R.id.detail_host_profile_job);
         TextView localeChip = (TextView) findViewById(R.id.detail_host_profile_locale);
         TextView countryChip = (TextView) findViewById(R.id.detail_host_profile_country);
+        TextView introductionTextView = (TextView) findViewById(R.id.detail_host_introduction);
         hostNameTextView.setText(ownerTemp.get("name").toString());
         schoolChip.setText(ownerTemp.get("school").toString());
         jobChip.setText(ownerTemp.get("job").toString());
         localeChip.setText(ownerTemp.get("locale").toString());
         countryChip.setText(ownerTemp.get("country").toString());
+        introductionTextView.setText(ownerTemp.get("introduction").toString());
 
+        Button reviewSeeButton = (Button) findViewById(R.id.detail_review_button);
+        reviewSeeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(), OwnedReviewActivity.class);
+                //Send selected item information to OwnedReviewActivity
+                intent.putExtra("userId", ownerTemp.get("id").toString());
+                intent.putExtra("name", ownerTemp.get("name").toString());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getApplicationContext().startActivity(intent);
+            }
+        });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);

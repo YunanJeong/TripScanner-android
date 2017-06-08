@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -88,6 +89,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         TextView checkInView;
         TextView checkOutView;
 
+
         public ViewHolder(View v) {
             super(v);
 
@@ -97,6 +99,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             ownerNameView = (TextView) cardView.findViewById(R.id.owner_name);
             checkInView = (TextView) cardView.findViewById(R.id.check_in);
             checkOutView = (TextView) cardView.findViewById(R.id.check_out);
+
         }
     }
 

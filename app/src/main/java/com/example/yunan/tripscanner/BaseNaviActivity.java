@@ -33,14 +33,6 @@ public class BaseNaviActivity extends AppCompatActivity implements NavigationVie
         toolbar.setTitle("BaseNaviActivity");
         //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(
@@ -92,12 +84,12 @@ public class BaseNaviActivity extends AppCompatActivity implements NavigationVie
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        // Handle the case that opening item is selected again
+        /*// Handle the case that opening item is selected again
         if(id == mCurrentId){
             drawer.closeDrawer(GravityCompat.START);
             return true;
         }
-        mCurrentId = id;
+        mCurrentId = id;*/
 
 
         if (id == R.id.nav_search) {
@@ -107,11 +99,13 @@ public class BaseNaviActivity extends AppCompatActivity implements NavigationVie
             Intent intent = new Intent(this, JoinedTripActivity.class) ;
             startActivity(intent) ;
         } else if (id == R.id.nav_hosted_trip) {
-
-        } else if (id == R.id.nav_newsfeed) {
-            selectNewsFeed();
-        } else if (id == R.id.nav_register) {
-            Intent intent = new Intent(this, RegisterActivity.class);
+            Intent intent = new Intent(this, HostedTripActivity.class) ;
+            startActivity(intent) ;
+        } else if (id == R.id.nav_owned_review) {
+            Intent intent = new Intent(this, OwnedReviewActivity.class) ;
+            startActivity(intent) ;
+        } else if (id == R.id.nav_written_review) {
+            Intent intent = new Intent(this, WrittenReviewActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_profile) {
             Intent intent = new Intent(this, ProfileActivity.class);

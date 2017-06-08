@@ -20,6 +20,11 @@ public class CommunicationManager {
     private final String mSocketAddr = "http://52.79.118.255:3000";
     //AWS server url : http://52.79.118.255:3000
     //Raspberry server url : http://huy.dlinkddns.com
+
+    public String getSocketAddr(){
+        return mSocketAddr;
+    };
+
     public String PUT(String url, Object obj){
         String json = "";
         String result = "";

@@ -20,14 +20,29 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_base_navi" />
+    <!--<include layout="@layout/content_base_navi" />-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="좌측 상단 메뉴에서 지금 바로 TripScanner를 시작하세요!"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="⊙ Copyright(c)2017 | Zenith team All rights reserved."
+            android:gravity="center" />
+
+
+    </LinearLayout>
+
+
 
 </android.support.design.widget.CoordinatorLayout>

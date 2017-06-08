@@ -12,12 +12,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+
     <ImageView
         android:id="@+id/nav_user_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        app:srcCompat="@android:drawable/sym_def_app_icon" />
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:foreground="@drawable/shape_profile_image"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/ic_account_circle_black_24dp" />
 
     <TextView
         android:id="@+id/nav_user_name"

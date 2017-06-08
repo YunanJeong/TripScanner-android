@@ -39,9 +39,6 @@
             android:name=".ProfileEditActivity"
             android:label="@string/title_activity_profile" />
         <activity
-            android:name=".ReivewActivity"
-            android:label="@string/title_activity_reivew" />
-        <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />
         <activity
@@ -63,10 +60,11 @@
 
         <activity
             android:name=".IntroActivity"
-            android:label="@string/title_activity_intro"
+            android:label="TripScanner"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -74,8 +72,35 @@
         <activity
             android:name=".JoinedTripActivity"
             android:label="@string/title_activity_joined_trip"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".BaseNaviActivity">
+            android:parentActivityName=".BaseNaviActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.yunan.tripscanner.MainActivity" />
+        </activity>
+        <activity
+            android:name=".HostedTripActivity"
+            android:label="@string/title_activity_hosted_trip"
+            android:parentActivityName=".BaseNaviActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.yunan.tripscanner.MainActivity" />
+        </activity>
+        <activity
+            android:name=".OwnedReviewActivity"
+            android:label="@string/title_activity_owned_review"
+            android:parentActivityName=".BaseNaviActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.yunan.tripscanner.MainActivity" />
+        </activity>
+        <activity
+            android:name=".WrittenReviewActivity"
+            android:label="@string/title_activity_written_review"
+            android:parentActivityName=".BaseNaviActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.yunan.tripscanner.MainActivity" />

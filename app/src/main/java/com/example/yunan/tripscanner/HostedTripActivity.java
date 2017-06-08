@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 
-public class JoinedTripActivity extends AppCompatActivity {
+public class HostedTripActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
@@ -24,7 +24,7 @@ public class JoinedTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_joined_hosted_trip);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("참여한 동행 목록");
+        getSupportActionBar().setTitle("내가 생성한 동행 목록");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Joined Result View
@@ -46,7 +46,7 @@ public class JoinedTripActivity extends AppCompatActivity {
             //attempt authentication against a network service.
 
             CommunicationManager communication = new CommunicationManager();
-            String searchResult = communication.GET("/api/v1/trips/joined");
+            String searchResult = communication.GET("/api/v1/trips/owned");
 
             Trip trip = new Trip();
             ObjectMapper mapper = new ObjectMapper();
@@ -63,11 +63,7 @@ public class JoinedTripActivity extends AppCompatActivity {
         protected void onPostExecute(final Trip trip) {
             mSearchTask = null;
 
-            RecyclerAdapter adapter = new RecyclerAdapter(getApplicationContext(), trip){
-                //@Override
-
-
-            };
+            RecyclerAdapter adapter = new RecyclerAdapter(getApplicationContext(), trip);
             mRecyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
 
