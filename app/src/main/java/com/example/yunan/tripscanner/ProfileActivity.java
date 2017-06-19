@@ -10,11 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -26,6 +29,9 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView mLocale;
     private TextView mCountry;
     private TextView mIntroduction;
+    //private RadioGroup mRadioGroup;
+    private User mOriginalUserInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +47,10 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
-                startActivity(intent); //액티비티 이동
+                //Send selected item information to TripDetailActivity
+                intent.putExtra("User",  mOriginalUserInfo);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
@@ -52,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
         mLocale = (TextView) findViewById(R.id.id_locale);
         mCountry = (TextView) findViewById(R.id.id_country);
         mIntroduction = (TextView) findViewById(R.id.id_introduction);
+        //mRadioGroup = (RadioGroup) findViewById(R.id.radio_Gender);
 
         mDownloadProfileInfoTask = new DownloadProfileInfoTask();
         mDownloadProfileInfoTask.execute((Void)null);
@@ -89,6 +99,8 @@ public class ProfileActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+            //프로필 수정용
+            mOriginalUserInfo = user;
 
             return user;
         }

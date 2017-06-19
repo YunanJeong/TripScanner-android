@@ -12,10 +12,13 @@ import java.util.Map;
 public class Review {
 
     private List<Map<String,Object>> reviews = new ArrayList<Map<String,Object>>();
-
+    private Map<String,Object> review = new HashMap<String, Object>() ;
 
     public List getReviews(){
         return reviews;
+    }
+    public Map<String,Object> getReview(){
+        return review;
     }
 
 }

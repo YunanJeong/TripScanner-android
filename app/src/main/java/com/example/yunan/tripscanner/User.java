@@ -1,12 +1,13 @@
 package com.example.yunan.tripscanner;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by yunan on 2017-05-20.
  */
-public class User {
+public class User implements Serializable{
     private Map<String,Object> user = new HashMap<String,Object>();
 
     public Map<String,Object> getUser(){

@@ -105,6 +105,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.yunan.tripscanner.MainActivity" />
         </activity>
+        <activity
+            android:name=".PendingReviewActivity"
+            android:label="@string/title_activity_pending_review"
+            android:parentActivityName=".BaseNaviActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.yunan.tripscanner.MainActivity" />
+
+
+        </activity>
     </application>
 
 </manifest>

@@ -21,7 +21,7 @@
             android:title="Owned Review" />
         <item
             android:id="@+id/nav_written_review"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_user_introduction"
             android:title="Written Review" />
         <item
             android:id="@+id/nav_pending_review"

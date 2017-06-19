@@ -68,6 +68,7 @@
     <string name="title_activity_hosted_trip">HostedTripActivity</string>
     <string name="title_activity_owned_review">OwnedReviewActivity</string>
     <string name="title_activity_written_review">WrittenReviewActivity</string>
+    <string name="title_activity_pending_review">PendingReviewActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
